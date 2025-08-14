@@ -5,12 +5,9 @@
 	onMount(() => {
 		mermaid.initialize({ startOnLoad: true });
 	});
-
-
-
 </script>
 
-	<pre class:mermaid>
+<pre class:mermaid>
 flowchart LR
   %% Stage 0 — Pools (4 heats of 4)
   subgraph Pools["Initial Pools"]
