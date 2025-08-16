@@ -1,0 +1,146 @@
+[
+  {
+    "name": "Mario Kart Stadium",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Water Park",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Sweet Sweet Canyon",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Thwomp Ruins",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Mario Circuit",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Toad Harbor",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Twisted Mansion",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Shy Guy Falls",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Sunshine Airport",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Dolphin Shoals",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Electrodrome",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Mount Wario",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Cloudtop Cruise",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Bone-Dry Dunes",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Bowser's Castle",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Rainbow Road",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Moo Moo Meadows",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Mario Circuit",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Cheep Cheep Beach",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Toad's Turnpike",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Dry Dry Desert",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Donut Plains 3",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Royal Raceway",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "DK Jungle",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Wario Stadium",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Sherbet Land",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Music Park",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Yoshi Valley",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Tick-Tock Clock",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Piranha Plant Slide",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Grumble Volcano",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Rainbow Road",
+    "isDeluxCourse": false
+  },
+  {
+    "name": "Yoshi Circuit",
+    "isDeluxCourse": true
+  },
+  {
+    "name": "Excitebike Arena",
+    "isDeluxCourse": true
+  },
+  {
+    "name": "Dragon Driftway",
+    "isDeluxCourse": true
+  },
+  {
+    "name": "Mute City",
+    "isDeluxCourse": true
+  }
+]
