@@ -1,21 +1,85 @@
 <script lang="ts">
 	import Spinner from '$lib/components/Spinner.svelte';
 	import {
-		getDefaultMarioKartItems,
+		getDefaultMK8Tracks,
+		getMK8TracksWithDLC,
 		selectRandomItem,
 		calculateSpinRotation,
 		type PickerItem
 	} from '$lib/utils/picker.util.js';
 	import { cn } from '$lib/utils.js';
-	import { Play, Plus, Trash2, RotateCcw } from '@lucide/svelte';
+	import { Play, Plus, Trash2, RotateCcw, Filter } from '@lucide/svelte';
+	import { onMount } from 'svelte';
+
+	// Game selection options
+	const gameOptions = [
+		{ id: 'mk8deluxe', name: 'Mario Kart 8 Deluxe', available: true },
+		{ id: 'mkworld', name: 'Mario Kart World', available: false },
+		{ id: 'mkwii', name: 'Mario Kart Wii', available: false }
+	];
 
 	// Svelte 5 runes for reactive state
-	let items = $state<PickerItem[]>(getDefaultMarioKartItems());
+	let selectedGame = $state('mk8deluxe');
+	let includeDLC = $state(false);
+	let items = $state<PickerItem[]>([]);
+	let originalItems = $state<PickerItem[]>([]);
 	let isSpinning = $state(false);
 	let rotation = $state(0);
 	let selectedItem = $state<PickerItem | null>(null);
 	let newItemName = $state('');
 	let newItemColor = $state('#FF0000');
+	let showFilters = $state(true);
+
+	// Load tracks on mount and when filters change
+	onMount(() => {
+		loadTracks();
+	});
+
+	// Reactive effect to reload tracks when filters change
+	$effect(() => {
+		if (selectedGame === 'mk8deluxe') {
+			loadTracks();
+		}
+	});
+
+	async function loadTracks() {
+		try {
+			let tracks: PickerItem[];
+			if (includeDLC) {
+				tracks = await getMK8TracksWithDLC();
+			} else {
+				tracks = await getDefaultMK8Tracks();
+			}
+			items = [...tracks];
+			originalItems = [...tracks];
+		} catch (error) {
+			console.error('Failed to load tracks:', error);
+			// Fallback tracks
+			items = [
+				{ id: 'mario-kart-stadium', label: 'Mario Kart Stadium', color: '#FF6B6B' },
+				{ id: 'water-park', label: 'Water Park', color: '#4ECDC4' },
+				{ id: 'sweet-sweet-canyon', label: 'Sweet Sweet Canyon', color: '#FFB347' },
+				{ id: 'thwomp-ruins', label: 'Thwomp Ruins', color: '#95A5A6' }
+			];
+			originalItems = [...items];
+		}
+	}
+
+	// Handle game selection change
+	function handleGameChange(gameId: string) {
+		if (gameOptions.find((g) => g.id === gameId)?.available) {
+			selectedGame = gameId;
+			if (gameId === 'mk8deluxe') {
+				loadTracks();
+			}
+		}
+	}
+
+	// Handle DLC toggle
+	function handleDLCToggle() {
+		includeDLC = !includeDLC;
+		loadTracks();
+	}
 
 	// Add new item to the picker
 	function addItem() {
@@ -68,10 +132,10 @@
 		selectedItem = null;
 	}
 
-	// Reset to default items
+	// Reset to original tracks
 	function resetToDefaults() {
 		if (isSpinning) return;
-		items = getDefaultMarioKartItems();
+		items = [...originalItems];
 		selectedItem = null;
 	}
 
@@ -84,15 +148,84 @@
 </script>
 
 <svelte:head>
-	<title>Mario Kart Random Picker</title>
+	<title>Mario Kart Track Picker</title>
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8 max-w-4xl">
+<div class="container mx-auto px-4 py-8 max-w-6xl">
 	<div class="text-center mb-8">
-		<h1 class="text-4xl font-bold text-gray-900 mb-2">🏁 Mario Kart Random Picker</h1>
-		<p class="text-gray-600">
-			Spin the wheel to randomly select a character, track, or anything else!
-		</p>
+		<h1 class="text-4xl font-bold text-gray-900 mb-2">🏁 Mario Kart Track Picker</h1>
+		<p class="text-gray-600">Spin the wheel to randomly select a Mario Kart track!</p>
+	</div>
+
+	<!-- Filters Section -->
+	<div class="mb-8 p-6 bg-gray-50 rounded-lg">
+		<div class="flex items-center justify-between mb-4">
+			<h2 class="text-xl font-semibold text-gray-800">Filter Options</h2>
+			<button
+				onclick={() => (showFilters = !showFilters)}
+				class="flex items-center space-x-2 text-blue-600 hover:text-blue-800"
+			>
+				<Filter class="h-4 w-4" />
+				<span>{showFilters ? 'Hide' : 'Show'} Filters</span>
+			</button>
+		</div>
+
+		{#if showFilters}
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				<!-- Game Selection -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-3">Select Game</label>
+					<div class="space-y-2">
+						{#each gameOptions as game (game.id)}
+							<button
+								onclick={() => handleGameChange(game.id)}
+								disabled={!game.available}
+								class={cn(
+									'w-full text-left px-4 py-3 rounded-md border transition-all',
+									game.available
+										? selectedGame === game.id
+											? 'border-blue-500 bg-blue-50 text-blue-900'
+											: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'
+										: 'border-gray-200 bg-gray-100 text-gray-400 cursor-not-allowed'
+								)}
+							>
+								<div class="flex items-center justify-between">
+									<span class="font-medium">{game.name}</span>
+									{#if !game.available}
+										<span class="text-xs text-gray-500">Coming Soon</span>
+									{/if}
+								</div>
+							</button>
+						{/each}
+					</div>
+				</div>
+
+				<!-- DLC Options (only for MK8 Deluxe) -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-3">Track Options</label>
+					{#if selectedGame === 'mk8deluxe'}
+						<div class="space-y-3">
+							<label class="flex items-center space-x-3 cursor-pointer">
+								<input
+									type="checkbox"
+									checked={includeDLC}
+									onchange={handleDLCToggle}
+									class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+								/>
+								<span class="text-gray-700">Include DLC Tracks</span>
+							</label>
+							<p class="text-sm text-gray-500">
+								{includeDLC
+									? `All tracks included (${items.length} tracks)`
+									: `Base game tracks only (${items.length} tracks)`}
+							</p>
+						</div>
+					{:else}
+						<p class="text-gray-500 italic">Options will be available when game is released</p>
+					{/if}
+				</div>
+			</div>
+		{/if}
 	</div>
 
 	<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -108,7 +241,7 @@
 					>
 						<div class="text-center">
 							<Plus class="mx-auto mb-2 h-12 w-12" />
-							<p class="text-lg font-medium">Add items to spin!</p>
+							<p class="text-lg font-medium">Loading tracks...</p>
 						</div>
 					</div>
 				{/if}
@@ -148,7 +281,7 @@
 			<!-- Selected Result -->
 			{#if selectedItem}
 				<div class="text-center p-6 bg-green-50 border-2 border-green-200 rounded-lg">
-					<h3 class="text-2xl font-bold text-green-800 mb-2">🎉 Winner!</h3>
+					<h3 class="text-2xl font-bold text-green-800 mb-2">🏆 Selected Track!</h3>
 					<div
 						class="inline-block px-4 py-2 rounded-full text-white font-semibold text-lg"
 						style="background-color: {selectedItem.color || '#6366f1'}"
@@ -162,22 +295,22 @@
 		<!-- Items Management Section -->
 		<div class="space-y-6">
 			<div>
-				<h2 class="text-2xl font-bold text-gray-900 mb-4">Manage Items</h2>
+				<h2 class="text-2xl font-bold text-gray-900 mb-4">Manage Tracks</h2>
 
 				<!-- Add new item form -->
 				<div class="bg-gray-50 p-4 rounded-lg mb-6">
-					<h3 class="text-lg font-semibold text-gray-800 mb-3">Add New Item</h3>
+					<h3 class="text-lg font-semibold text-gray-800 mb-3">Add Custom Track</h3>
 					<div class="space-y-3">
 						<div>
 							<label for="item-name" class="block text-sm font-medium text-gray-700 mb-1">
-								Item Name
+								Track Name
 							</label>
 							<input
 								id="item-name"
 								type="text"
 								bind:value={newItemName}
 								onkeydown={handleKeyDown}
-								placeholder="Enter item name..."
+								placeholder="Enter track name..."
 								class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
 							/>
 						</div>
@@ -203,7 +336,7 @@
 							)}
 						>
 							<Plus class="inline h-4 w-4 mr-2" />
-							Add Item
+							Add Track
 						</button>
 					</div>
 				</div>
@@ -211,12 +344,12 @@
 				<!-- Items list -->
 				<div class="space-y-2">
 					<h3 class="text-lg font-semibold text-gray-800">
-						Current Items ({items.length})
+						Current Tracks ({items.length})
 					</h3>
 					{#if items.length === 0}
-						<p class="text-gray-500 text-center py-4">No items added yet</p>
+						<p class="text-gray-500 text-center py-4">Loading tracks...</p>
 					{:else}
-						<div class="space-y-2 max-h-64 overflow-y-auto">
+						<div class="space-y-2 max-h-80 overflow-y-auto">
 							{#each items as item (item.id)}
 								<div
 									class="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-md"
@@ -228,18 +361,20 @@
 										></div>
 										<span class="font-medium text-gray-900">{item.label}</span>
 									</div>
-									<button
-										onclick={() => removeItem(item.id)}
-										disabled={isSpinning}
-										class={cn(
-											'p-1 rounded-md transition-colors',
-											isSpinning
-												? 'text-gray-400 cursor-not-allowed'
-												: 'text-red-600 hover:bg-red-50'
-										)}
-									>
-										<Trash2 class="h-4 w-4" />
-									</button>
+									{#if !originalItems.some((orig) => orig.id === item.id)}
+										<button
+											onclick={() => removeItem(item.id)}
+											disabled={isSpinning}
+											class={cn(
+												'p-1 rounded-md transition-colors',
+												isSpinning
+													? 'text-gray-400 cursor-not-allowed'
+													: 'text-red-600 hover:bg-red-50'
+											)}
+										>
+											<Trash2 class="h-4 w-4" />
+										</button>
+									{/if}
 								</div>
 							{/each}
 						</div>
@@ -257,7 +392,7 @@
 							: 'text-gray-700 hover:bg-gray-50 active:scale-95'
 					)}
 				>
-					Reset to Mario Kart Characters
+					Reset to Default Tracks
 				</button>
 			</div>
 		</div>

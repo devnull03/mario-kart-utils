@@ -67,55 +67,58 @@
 	}
 </script>
 
-<div
-	bind:this={spinnerElement}
-	class={cn(
-		'relative rounded-full border-4 border-gray-300 bg-white shadow-lg overflow-hidden',
-		'transition-transform duration-3000 ease-out',
-		className
-	)}
-	style="width: {size}px; height: {size}px; transform: rotate({rotation}deg);"
-	onanimationend={handleAnimationEnd}
-	{...restProps}
->
-	<!-- Spinner segments -->
-	<svg class="absolute inset-0 h-full w-full" viewBox="0 0 {size} {size}">
-		{#each items as item, index (item.id)}
-			{@const textPos = getTextPosition(index, size / 2, size / 2, size / 2 - 4)}
-			<g>
-				<!-- Segment path -->
-				<path
-					d={createSegmentPath(index, size / 2, size / 2, size / 2 - 4)}
-					fill={item.color || `hsl(${(index * 360) / items.length}, 70%, 60%)`}
-					stroke="#fff"
-					stroke-width="2"
-				/>
-
-				<!-- Item label -->
-				<text
-					x={textPos.x}
-					y={textPos.y}
-					text-anchor="middle"
-					dominant-baseline="middle"
-					class="fill-white text-xs font-semibold"
-					style="font-size: {Math.max(10, size / 25)}px;"
-					transform="rotate({textPos.angle}, {textPos.x}, {textPos.y})"
-				>
-					{item.label}
-				</text>
-			</g>
-		{/each}
-	</svg>
-
-	<!-- Center circle -->
-	<div
-		class="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800 shadow-md z-10"
-	></div>
-
-	<!-- Pointer -->
-	<div class="absolute left-1/2 top-0 z-20" style="transform: translateX(-50%) translateY(-12px);">
+<!-- Container for the entire spinner with fixed pointer -->
+<div class="relative" style="width: {size}px; height: {size}px;" {...restProps}>
+	<!-- Fixed pointer at the top -->
+	<div class="absolute left-1/2 top-0 z-30" style="transform: translateX(-50%) translateY(-12px);">
 		<div
 			class="h-0 w-0 border-l-[12px] border-r-[12px] border-t-[24px] border-l-transparent border-r-transparent border-t-red-500 drop-shadow-md"
+		></div>
+	</div>
+
+	<!-- Rotating spinner wheel -->
+	<div
+		bind:this={spinnerElement}
+		class={cn(
+			'relative rounded-full border-4 border-gray-300 bg-white shadow-lg overflow-hidden',
+			'transition-transform duration-3000 ease-out',
+			className
+		)}
+		style="width: {size}px; height: {size}px; transform: rotate({rotation}deg);"
+		onanimationend={handleAnimationEnd}
+	>
+		<!-- Spinner segments -->
+		<svg class="absolute inset-0 h-full w-full" viewBox="0 0 {size} {size}">
+			{#each items as item, index (item.id)}
+				{@const textPos = getTextPosition(index, size / 2, size / 2, size / 2 - 4)}
+				<g>
+					<!-- Segment path -->
+					<path
+						d={createSegmentPath(index, size / 2, size / 2, size / 2 - 4)}
+						fill={item.color || `hsl(${(index * 360) / items.length}, 70%, 60%)`}
+						stroke="#fff"
+						stroke-width="2"
+					/>
+
+					<!-- Item label -->
+					<text
+						x={textPos.x}
+						y={textPos.y}
+						text-anchor="middle"
+						dominant-baseline="middle"
+						class="fill-white text-xs font-semibold"
+						style="font-size: {Math.max(10, size / 25)}px;"
+						transform="rotate({textPos.angle}, {textPos.x}, {textPos.y})"
+					>
+						{item.label}
+					</text>
+				</g>
+			{/each}
+		</svg>
+
+		<!-- Center circle -->
+		<div
+			class="absolute left-1/2 top-1/2 h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gray-800 shadow-md z-10"
 		></div>
 	</div>
 </div>
