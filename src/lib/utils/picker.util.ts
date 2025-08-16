@@ -1,3 +1,5 @@
+import { generateColorFromIndex } from '$lib/utils.js';
+
 export interface PickerItem {
 	id: string;
 	label: string;
@@ -6,21 +8,8 @@ export interface PickerItem {
 }
 
 export interface TrackItem {
-	id: string;
 	name: string;
-	cup: string;
-	series: string;
-	difficulty: string;
-	environment: string;
-	color: string;
-	pack?: string; // for DLC tracks
-}
-
-export interface GameData {
-	game: string;
-	baseTracks: TrackItem[];
-	retrotracks: TrackItem[];
-	dlcTracks: TrackItem[];
+	isDeluxCourse: boolean;
 }
 
 export interface SpinnerState {
@@ -74,66 +63,53 @@ export function calculateSpinRotation(
 }
 
 /**
- * Generates default Mario Kart related picker items
- */
-export function getDefaultMarioKartItems(): PickerItem[] {
-	return [
-		{ id: 'mario', label: 'Mario', color: '#FF0000' },
-		{ id: 'luigi', label: 'Luigi', color: '#00FF00' },
-		{ id: 'peach', label: 'Princess Peach', color: '#FFB6C1' },
-		{ id: 'bowser', label: 'Bowser', color: '#8B4513' },
-		{ id: 'yoshi', label: 'Yoshi', color: '#32CD32' },
-		{ id: 'toad', label: 'Toad', color: '#FF69B4' },
-		{ id: 'koopa', label: 'Koopa Troopa', color: '#90EE90' },
-		{ id: 'shy-guy', label: 'Shy Guy', color: '#FF6347' }
-	];
-}
-
-/**
  * Converts track items to picker items
  */
 export function tracksToPickerItems(tracks: TrackItem[]): PickerItem[] {
-	return tracks.map((track) => ({
-		id: track.id,
+	return tracks.map((track, index) => ({
+		id: track.name.toLowerCase().replace(/[^a-z0-9]/g, '-'),
 		label: track.name,
-		color: track.color
+		color: generateColorFromIndex(index)
 	}));
 }
 
 /**
- * Gets default Mario Kart 8 Deluxe tracks (base + retro, no DLC)
+ * Loads tracks from JSON file
+ */
+async function loadTracksFromJSON(): Promise<TrackItem[]> {
+	try {
+		// Import the JSON directly - this will work in both dev and production
+		const { default: tracks } = await import('../data/mario-kart-8-deluxe.json');
+		return tracks as TrackItem[];
+	} catch (error) {
+		console.error('Failed to load tracks from JSON:', error);
+		try {
+			// Try to load fallback tracks from JSON
+			const { default: fallbackTracks } = await import('../data/fallback-tracks.json');
+			return fallbackTracks as TrackItem[];
+		} catch (fallbackError) {
+			console.error('Failed to load fallback tracks:', fallbackError);
+			// Last resort: empty array - the UI will handle this gracefully
+			return [];
+		}
+	}
+}
+
+/**
+ * Gets default Mario Kart 8 Deluxe tracks (base game only, no DLC)
  */
 export async function getDefaultMK8Tracks(): Promise<PickerItem[]> {
-	try {
-		const response = await fetch('/data/mario-kart-8-deluxe.json');
-		const gameData: GameData = await response.json();
-		const allBaseTracks = [...gameData.baseTracks, ...gameData.retrotracks];
-		return tracksToPickerItems(allBaseTracks);
-	} catch (error) {
-		console.error('Failed to load MK8 tracks:', error);
-		// Fallback to a few manual tracks
-		return [
-			{ id: 'mario-kart-stadium', label: 'Mario Kart Stadium', color: '#FF6B6B' },
-			{ id: 'water-park', label: 'Water Park', color: '#4ECDC4' },
-			{ id: 'sweet-sweet-canyon', label: 'Sweet Sweet Canyon', color: '#FFB347' },
-			{ id: 'thwomp-ruins', label: 'Thwomp Ruins', color: '#95A5A6' }
-		];
-	}
+	const allTracks = await loadTracksFromJSON();
+	const baseTracks = allTracks.filter(track => !track.isDeluxCourse);
+	return tracksToPickerItems(baseTracks);
 }
 
 /**
  * Gets Mario Kart 8 Deluxe tracks with DLC included
  */
 export async function getMK8TracksWithDLC(): Promise<PickerItem[]> {
-	try {
-		const response = await fetch('/data/mario-kart-8-deluxe.json');
-		const gameData: GameData = await response.json();
-		const allTracks = [...gameData.baseTracks, ...gameData.retrotracks, ...gameData.dlcTracks];
-		return tracksToPickerItems(allTracks);
-	} catch (error) {
-		console.error('Failed to load MK8 tracks with DLC:', error);
-		return getDefaultMK8Tracks();
-	}
+	const allTracks = await loadTracksFromJSON();
+	return tracksToPickerItems(allTracks);
 }
 
 /**

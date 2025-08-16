@@ -54,14 +54,9 @@
 			originalItems = [...tracks];
 		} catch (error) {
 			console.error('Failed to load tracks:', error);
-			// Fallback tracks
-			items = [
-				{ id: 'mario-kart-stadium', label: 'Mario Kart Stadium', color: '#FF6B6B' },
-				{ id: 'water-park', label: 'Water Park', color: '#4ECDC4' },
-				{ id: 'sweet-sweet-canyon', label: 'Sweet Sweet Canyon', color: '#FFB347' },
-				{ id: 'thwomp-ruins', label: 'Thwomp Ruins', color: '#95A5A6' }
-			];
-			originalItems = [...items];
+			// The utility function already handles fallbacks, but if all fails, set empty array
+			items = [];
+			originalItems = [];
 		}
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PickerItem } from '$lib/utils/picker.util.js';
-	import { cn } from '$lib/utils.js';
+	import { cn, generateColorFromIndex } from '$lib/utils.js';
 
 	interface Props {
 		items: PickerItem[];
@@ -95,7 +95,7 @@
 					<!-- Segment path -->
 					<path
 						d={createSegmentPath(index, size / 2, size / 2, size / 2 - 4)}
-						fill={item.color || `hsl(${(index * 360) / items.length}, 70%, 60%)`}
+						fill={item.color || generateColorFromIndex(index)}
 						stroke="#fff"
 						stroke-width="2"
 					/>
