@@ -63,7 +63,11 @@
 		const textRadius = radius * 0.7;
 		const x = centerX + textRadius * Math.cos(angle);
 		const y = centerY + textRadius * Math.sin(angle);
-		return { x, y, angle: index * segmentAngle + segmentAngle / 2 };
+		
+		let textRotation = (index * segmentAngle + segmentAngle / 2) - 90;
+		
+	
+		return { x, y, angle: textRotation };
 	}
 </script>
 
@@ -80,7 +84,7 @@
 	<div
 		bind:this={spinnerElement}
 		class={cn(
-			'relative rounded-full border-4 border-gray-300 bg-white shadow-lg overflow-hidden',
+			'relative rounded-full border-4 border-gray-300 bg-white overflow-hidden',
 			'transition-transform duration-3000 ease-out',
 			className
 		)}
@@ -89,7 +93,7 @@
 	>
 		<!-- Spinner segments -->
 		<svg class="absolute inset-0 h-full w-full" viewBox="0 0 {size} {size}">
-			{#each items as item, index (item.id)}
+			{#each items as item, index (index)}
 				{@const textPos = getTextPosition(index, size / 2, size / 2, size / 2 - 4)}
 				<g>
 					<!-- Segment path -->
@@ -106,8 +110,8 @@
 						y={textPos.y}
 						text-anchor="middle"
 						dominant-baseline="middle"
-						class="fill-white text-xs font-semibold"
-						style="font-size: {Math.max(10, size / 25)}px;"
+						class="fill-white text-xs font-bold"
+						style="font-size: {Math.min(12, Math.max(8, size / 30))}px;"
 						transform="rotate({textPos.angle}, {textPos.x}, {textPos.y})"
 					>
 						{item.label}

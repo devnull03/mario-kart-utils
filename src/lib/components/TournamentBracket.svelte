@@ -382,7 +382,7 @@
 	</div>
 </div>
 
-<style>
+<style type="postcss">
 
 	@reference '../../app.css';
 
