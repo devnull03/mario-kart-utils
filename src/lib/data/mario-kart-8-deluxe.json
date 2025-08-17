@@ -1,146 +1,487 @@
 [
   {
     "name": "Mario Kart Stadium",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Water Park",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe", 
+    "type": "regular"
   },
   {
     "name": "Sweet Sweet Canyon",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Thwomp Ruins",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Mario Circuit",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Toad Harbor",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Twisted Mansion",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Shy Guy Falls",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Sunshine Airport",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Dolphin Shoals",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Electrodrome",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Mount Wario",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Cloudtop Cruise",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Bone-Dry Dunes",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Bowser's Castle",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Rainbow Road",
-    "isDeluxCourse": false
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Moo Moo Meadows",
-    "isDeluxCourse": false
+    "origin": "Wii",
+    "type": "regular"
   },
   {
     "name": "Mario Circuit",
-    "isDeluxCourse": false
+    "origin": "GBA",
+    "type": "regular"
   },
   {
     "name": "Cheep Cheep Beach",
-    "isDeluxCourse": false
+    "origin": "DS",
+    "type": "regular"
   },
   {
     "name": "Toad's Turnpike",
-    "isDeluxCourse": false
+    "origin": "N64",
+    "type": "regular"
   },
   {
     "name": "Dry Dry Desert",
-    "isDeluxCourse": false
+    "origin": "GCN",
+    "type": "regular"
   },
   {
     "name": "Donut Plains 3",
-    "isDeluxCourse": false
+    "origin": "SNES",
+    "type": "regular"
   },
   {
     "name": "Royal Raceway",
-    "isDeluxCourse": false
+    "origin": "N64",
+    "type": "regular"
   },
   {
     "name": "DK Jungle",
-    "isDeluxCourse": false
+    "origin": "3DS",
+    "type": "regular"
   },
   {
     "name": "Wario Stadium",
-    "isDeluxCourse": false
+    "origin": "DS",
+    "type": "regular"
   },
   {
     "name": "Sherbet Land",
-    "isDeluxCourse": false
+    "origin": "GCN",
+    "type": "regular"
   },
   {
     "name": "Music Park",
-    "isDeluxCourse": false
+    "origin": "3DS",
+    "type": "regular",
+    "alternateName": "Melody Motorway"
   },
   {
     "name": "Yoshi Valley",
-    "isDeluxCourse": false
+    "origin": "N64",
+    "type": "regular"
   },
   {
     "name": "Tick-Tock Clock",
-    "isDeluxCourse": false
+    "origin": "DS",
+    "type": "regular"
   },
   {
     "name": "Piranha Plant Slide",
-    "isDeluxCourse": false
+    "origin": "3DS",
+    "type": "regular",
+    "alternateName": "Piranha Plant Pipeway"
   },
   {
     "name": "Grumble Volcano",
-    "isDeluxCourse": false
+    "origin": "Wii",
+    "type": "regular"
   },
   {
     "name": "Rainbow Road",
-    "isDeluxCourse": false
+    "origin": "N64",
+    "type": "regular"
   },
   {
     "name": "Yoshi Circuit",
-    "isDeluxCourse": true
+    "origin": "GCN",
+    "type": "regular"
   },
   {
     "name": "Excitebike Arena",
-    "isDeluxCourse": true
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Dragon Driftway",
-    "isDeluxCourse": true
+    "origin": "8 Deluxe",
+    "type": "regular"
   },
   {
     "name": "Mute City",
-    "isDeluxCourse": true
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Wario's Gold Mine",
+    "origin": "Wii",
+    "type": "regular"
+  },
+  {
+    "name": "Rainbow Road",
+    "origin": "SNES",
+    "type": "regular"
+  },
+  {
+    "name": "Ice Ice Outpost",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Hyrule Circuit",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Baby Park",
+    "origin": "GCN",
+    "type": "regular"
+  },
+  {
+    "name": "Cheese Land",
+    "origin": "GBA",
+    "type": "regular"
+  },
+  {
+    "name": "Wild Woods",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Animal Crossing",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Neo Bowser City",
+    "origin": "3DS",
+    "type": "regular",
+    "alternateName": "Koopa City"
+  },
+  {
+    "name": "Ribbon Road",
+    "origin": "GBA",
+    "type": "regular"
+  },
+  {
+    "name": "Super Bell Subway",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Big Blue",
+    "origin": "8 Deluxe",
+    "type": "regular"
+  },
+  {
+    "name": "Paris Promenade",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Toad Circuit",
+    "origin": "3DS",
+    "type": "booster"
+  },
+  {
+    "name": "Choco Mountain",
+    "origin": "N64",
+    "type": "booster"
+  },
+  {
+    "name": "Coconut Mall",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Tokyo Blur",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Shroom Ridge",
+    "origin": "DS",
+    "type": "booster"
+  },
+  {
+    "name": "Sky Garden",
+    "origin": "GBA",
+    "type": "booster"
+  },
+  {
+    "name": "Ninja Hideaway",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "New York Minute",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Mario Circuit 3",
+    "origin": "SNES",
+    "type": "booster"
+  },
+  {
+    "name": "Kalimari Desert",
+    "origin": "N64",
+    "type": "booster"
+  },
+  {
+    "name": "Waluigi Pinball",
+    "origin": "DS",
+    "type": "booster"
+  },
+  {
+    "name": "Sydney Sprint",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Snow Land",
+    "origin": "GBA",
+    "type": "booster"
+  },
+  {
+    "name": "Mushroom Gorge",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Sky-High Sundae",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "London Loop",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Boo Lake",
+    "origin": "GBA",
+    "type": "booster"
+  },
+  {
+    "name": "Rock Rock Mountain",
+    "origin": "3DS",
+    "type": "booster",
+    "alternateName": "Alpine Pass"
+  },
+  {
+    "name": "Maple Treeway",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Berlin Byways",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Peach Gardens",
+    "origin": "DS",
+    "type": "booster"
+  },
+  {
+    "name": "Merry Mountain",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Rainbow Road",
+    "origin": "3DS",
+    "type": "booster"
+  },
+  {
+    "name": "Amsterdam Drift",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Riverside Park",
+    "origin": "GBA",
+    "type": "booster"
+  },
+  {
+    "name": "DK Summit",
+    "origin": "Wii",
+    "type": "booster",
+    "alternateName": "DK's Snowboard Cross"
+  },
+  {
+    "name": "Yoshi's Island",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Bangkok Rush",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Mario Circuit",
+    "origin": "DS",
+    "type": "booster"
+  },
+  {
+    "name": "Waluigi Stadium",
+    "origin": "GCN",
+    "type": "booster"
+  },
+  {
+    "name": "Singapore Speedway",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Athens Dash",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Daisy Cruiser",
+    "origin": "GCN",
+    "type": "booster"
+  },
+  {
+    "name": "Moonview Highway",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Squeaky Clean Sprint",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Los Angeles Laps",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Sunset Wilds",
+    "origin": "GBA",
+    "type": "booster"
+  },
+  {
+    "name": "Koopa Cape",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Vancouver Velocity",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Rome Avanti",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "DK Mountain",
+    "origin": "GCN",
+    "type": "booster"
+  },
+  {
+    "name": "Daisy Circuit",
+    "origin": "Wii",
+    "type": "booster"
+  },
+  {
+    "name": "Piranha Plant Cove",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Madrid Drive",
+    "origin": "Tour",
+    "type": "booster"
+  },
+  {
+    "name": "Rosalina's Ice World",
+    "origin": "3DS",
+    "type": "booster"
+  },
+  {
+    "name": "Bowser Castle 3",
+    "origin": "SNES",
+    "type": "booster"
+  },
+  {
+    "name": "Rainbow Road",
+    "origin": "Wii",
+    "type": "booster"
   }
 ]
